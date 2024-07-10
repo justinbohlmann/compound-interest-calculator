@@ -81,10 +81,15 @@ function displayResults(totalAmount, totalInterest, totalDeposits) {
 }
 
 function updateChart(data, totalDeposits, totalInterest) {
-  const ctx = document.getElementById("chart").getContext("2d");
+  const ctx = document.getElementById("chart");
+  if (!ctx) {
+    console.error("Canvas element not found");
+    return;
+  }
 
-  if (chart) {
-    chart.destroy();
+  if (!Chart) {
+    console.error("Chart.js not loaded");
+    return;
   }
 
   chart = new Chart(ctx, {
